@@ -14,18 +14,18 @@ app.use((req, res, next) => {
     var log = `${now}: ${req.method}: '${req.url}' `;
 
     console.log(log);
-    fs.appendFile('server.log', log + '\n', (err) => {
-        if (err) {
-            console.log('Unable to append to server.log');
-        }
-    });
+    // fs.appendFile('server.log', log + '\n', (err) => {
+    //     if (err) {
+    //         console.log('Unable to append to server.log');
+    //     }
+    // });
 
     next();
 });
 
 // app.use((req, res, next) => {
 //     res.render('maintenance.hbs', {
-//         pageHeader: 'Maintenance'
+//         pageTitle: 'Maintenance'
 //     });
 // });
 
@@ -40,16 +40,21 @@ hbs.registerHelper('getCurrentYear', () => {
 // ROUTES
 app.get('/', (req, res) => {
     res.render('index.hbs', {
-        pageHeader: 'Home',
-        welcomeMessage: 'Wadaap',
+        pageTitle: 'Home'
     });
 });
 
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
-        pageHeader: 'About',
+        pageTitle: 'About'
     });
 });
+
+app.get('/projects', (req, res) => {
+    res.render('projects.hbs', {
+        pageTitle: 'Projects'
+    })
+})
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
